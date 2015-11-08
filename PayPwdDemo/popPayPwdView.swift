@@ -19,6 +19,7 @@ import UIKit
 public class popPayPwdView: UIView, UITextFieldDelegate {
     
     public init() {
+        //可重新定义frame
         super.init(frame: CGRect(x: 40, y: (SCREEN_SIZE_HEIGHT - 190) / 2, width: SCREEN_SIZE_WIDTH - 80, height: 190))
         self.customInit()
     }
@@ -26,15 +27,18 @@ public class popPayPwdView: UIView, UITextFieldDelegate {
     required public init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    //weak弱引用delegate
     public weak var delegate: popPayDelegate?
 
     var overlayView: UIControl!
     var payCodeTextField: CodeTextField!
     let lineTag = 1000
     let dotTag  = 3000
+    //线
     var lineLabel: UILabel?
+    //圆点
     var dotLabel: UILabel?
+    //密码长度默认6位
     let passWordLength = 6
     var pwdCode = ""
     
@@ -89,6 +93,7 @@ public class popPayPwdView: UIView, UITextFieldDelegate {
         
         let frame = payCodeTextField.frame
         let perWidth = (frame.size.width - CGFloat(passWordLength) + 1) * 1.0 / CGFloat(passWordLength)
+        //遍历密码长度，添加圆点
         for var i = 0; i < passWordLength; i++ {
             if i < passWordLength - 1 {
                 lineLabel = payCodeTextField.viewWithTag(lineTag + i) as? UILabel
